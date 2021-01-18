@@ -4,7 +4,7 @@ var AllItemsImages = [];
 var FirstImage = document.getElementById('First');
 var SecondImage = document.getElementById('Second');
 var ThirdImage = document.getElementById('Third');
-//var ItemsImagesDiv = document.getElementById('ItemsImagesDiv');
+var ItemsImagesDiv = document.getElementById('ItemsImagesDiv');
 
 var DefaultRoundsNumber = 25;
 var TotalClicks = 0;
@@ -73,22 +73,26 @@ function generateRandomIndex(){
 function renderThreeRandomImages()
 {
     FirstImageIndex = generateRandomIndex();
+
+    do{
     SecondImageIndex = generateRandomIndex();
     ThirdImageIndex = generateRandomIndex();
+    }
 
     while (FirstImageIndex === SecondImageIndex || FirstImageIndex === ThirdImageIndex || SecondImageIndex === ThirdImageIndex)
     {
-        SecondImageIndex = generateRandomIndex();
-        ThirdImageIndex = generateRandomIndex();
+        AllItemsImages[FirstImageIndex].ImagesShown++;
+        FirstImage.src = AllItemsImages[FirstImageIndex].source;
+        AllItemsImages[SecondImageIndex].ImagesShown++;
+        SecondImage.src = AllItemsImages[SecondImageIndex].source;
+        AllItemsImages[ThirdImageIndex].ImagesShown++;
+        ThirdImage.src = AllItemsImages[ThirdImageIndex].source;
     }
 
-    AllItemsImages[FirstImageIndex].ImagesShown++;
-    AllItemsImages[SecondImageIndex].ImagesShown++;
-    AllItemsImages[ThirdImageIndex].ImagesShown++;
-
-    FirstImage.src = AllItemsImages[FirstImageIndex].source;
-    SecondImage.src = AllItemsImages[SecondImageIndex].source;
-    ThirdImage.src = AllItemsImages[ThirdImageIndex].source;
+   
+    
+    
+    
     
 }
 
@@ -117,6 +121,13 @@ function handleUserClick(event)
 
     }
 
+    else
+    {
+        ItemsImagesDiv.removeEventListener('click' ,handleUserClick );
+        ResultButton.disabled = false;
+        
+    }
+
 
 }
 
@@ -138,6 +149,8 @@ function GoalResult()
     FirstImage.removeEventListener('click',handleUserClick);
     SecondImage.removeEventListener('click',handleUserClick);
     ThirdImage.removeEventListener('click',handleUserClick);
+
+    ResultButton.disabled = true;
 }
 
 
