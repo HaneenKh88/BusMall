@@ -1,12 +1,16 @@
 body
 {
     background-image: url(https://wallpaperset.com/w/full/0/8/7/52223.jpg);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 header
 {
     
-    border: 5px solid rgb(255, 255, 255);
+    border: 5px solid rgba(255, 255, 255, 0.603);
 }
 
 h3,p
@@ -79,4 +83,10 @@ label
     font-size: large;
     list-style-type: none;
     font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#BusMallChart
+{
+    
+    background-color: rgba(255, 255, 255, 0.603) ;
 }

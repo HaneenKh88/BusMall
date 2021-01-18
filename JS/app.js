@@ -1,6 +1,9 @@
 'Strict'
 
 var AllItemsImages = [];
+var clicksArr = []; // add number of clicks to the chart
+var shownArr = [];  // add number of shown to the chart
+var productsName = [];  // add name of images to the chart
 var FirstImage = document.getElementById('First');
 var SecondImage = document.getElementById('Second');
 var ThirdImage = document.getElementById('Third');
@@ -18,7 +21,7 @@ function ItemImages(name,source){
     this.source = source;
     this.ImagesClicks = 0;
     this.ImagesShown = 0;
-
+    productsName.push(name);
     AllItemsImages.push(this);
   }
 
@@ -35,7 +38,6 @@ function ItemImages(name,source){
   }
 
   
- 
 
 new ItemImages('bag', 'Images/bag.jpg');
 new ItemImages('banana', 'Images/banana.jpg');
@@ -151,7 +153,52 @@ function GoalResult()
     ThirdImage.removeEventListener('click',handleUserClick);
 
     ResultButton.disabled = true;
+
+
+    shownArr = [];
+    clicksArr = [];
+   
+    for (var i = 0; i < AllItemsImages.length; i++) {
+      shownArr.push(AllItemsImages[i].ImagesShown);
+      clicksArr.push(AllItemsImages[i].ImagesClicks);
+    }
+  
+      var ctx = document.getElementById('BusMallChart').getContext('2d');
+      var chart = new Chart(ctx, {
+      // The type of chart we want to create
+      type: 'bar',
+      
+      // The data for our dataset
+      data: {
+          labels: productsName,
+          datasets: [
+              {
+              label: 'Clicked',
+              backgroundColor: 'EF5FCA',
+              borderColor: 'FFFFFF',
+              data: clicksArr
+          },
+  
+          {
+              label: 'Shown',
+              backgroundColor: 'rgb(142, 0, 91)',
+              borderColor: 'FFFFFF',
+              data: shownArr
+          },
+      ],
+      },
+  
+      // Configuration options go here
+      options: {}
+  });
+  
+  
 }
+
+
+ 
+
+
 
 
 
