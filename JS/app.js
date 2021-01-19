@@ -63,9 +63,12 @@ new ItemImages('usb', 'Images/usb.gif');
 new ItemImages('water-can', 'Images/water-can.jpg');
 new ItemImages('wine-glass', 'Images/wine-glass.jpg');
 
-console.log(AllItemsImages);
+//console.log(AllItemsImages);
 
+StoreData();
+GetData();
 renderThreeRandomImages();
+
 
 FirstImage.addEventListener('click',handleUserClick);
 SecondImage.addEventListener('click',handleUserClick);
@@ -151,6 +154,19 @@ function handleUserClick(event)
     }
 
 
+}
+
+
+function StoreData()
+{
+    var Order = JSON.stringify(AllItemsImages);
+    localStorage.setItem(AllItemsImages.name,Order);
+}
+
+function GetData()
+{
+    var ItemStr = localStorage.getItem(AllItemsImages.name, AllItemsImages.ImagesShown, AllItemsImages.ImagesClicks);
+    ProductList = JSON.parse(ItemStr);
 }
 
   var ResultButton = document.getElementById('SubmitResult');
