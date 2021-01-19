@@ -15,6 +15,10 @@ var TotalClicks = 0;
 var FirstImageIndex ;
 var SecondImageIndex ;
 var ThirdImageIndex ;
+var FirstImageIndexPrevious = -1;
+var SecondImageIndexPrevious = -1;
+var ThirdImageIndexPrevious = -1;
+
 
 function ItemImages(name,source){
     this.name = name;
@@ -74,22 +78,38 @@ function generateRandomIndex(){
 
 function renderThreeRandomImages()
 {
+    var NonAllowed = [FirstImageIndexPrevious, SecondImageIndexPrevious, ThirdImageIndexPrevious];
+
+    do{
     FirstImageIndex = generateRandomIndex();
+    }
+    while(NonAllowed.includes(FirstImageIndex));
+
+    FirstImageIndexPrevious = FirstImageIndex;
+    NonAllowed.push(FirstImageIndex);
 
     do{
     SecondImageIndex = generateRandomIndex();
-    ThirdImageIndex = generateRandomIndex();
     }
+    while(NonAllowed.includes(SecondImageIndex))
+    
+    SecondImageIndexPrevious = SecondImageIndex;
+    NonAllowed.push(SecondImageIndex);
 
-    while (FirstImageIndex === SecondImageIndex || FirstImageIndex === ThirdImageIndex || SecondImageIndex === ThirdImageIndex)
-    {
+    do{
+    ThirdImageIndex = generateRandomIndex();
+    } 
+    while(NonAllowed.includes(ThirdImageIndex))
+    ThirdImageIndexPrevious = ThirdImageIndex;
+
+    
         AllItemsImages[FirstImageIndex].ImagesShown++;
         FirstImage.src = AllItemsImages[FirstImageIndex].source;
         AllItemsImages[SecondImageIndex].ImagesShown++;
         SecondImage.src = AllItemsImages[SecondImageIndex].source;
         AllItemsImages[ThirdImageIndex].ImagesShown++;
         ThirdImage.src = AllItemsImages[ThirdImageIndex].source;
-    }
+
 
    
     
@@ -189,7 +209,19 @@ function GoalResult()
       },
   
       // Configuration options go here
-      options: {}
+      options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    max: 25,
+                    min: 0,
+                    beginAtZero: 0,
+                    stepSize: 1,
+                }
+            }],
+
+        }
+      }
   });
   
   
