@@ -63,10 +63,9 @@ new ItemImages('usb', 'Images/usb.gif');
 new ItemImages('water-can', 'Images/water-can.jpg');
 new ItemImages('wine-glass', 'Images/wine-glass.jpg');
 
-//console.log(AllItemsImages);
+console.log(AllItemsImages);
 
-StoreData();
-GetData();
+
 renderThreeRandomImages();
 
 
@@ -153,29 +152,39 @@ function handleUserClick(event)
         
     }
 
-
+    StoreData();
 }
 
 
 function StoreData()
 {
     var Order = JSON.stringify(AllItemsImages);
-    localStorage.setItem(AllItemsImages.name,Order);
+    localStorage.setItem('Rounds',Order);
 }
 
 function GetData()
 {
-    var ItemStr = localStorage.getItem(AllItemsImages.name, AllItemsImages.ImagesShown, AllItemsImages.ImagesClicks);
+    var ItemStr = localStorage.getItem('Rounds');
     ProductList = JSON.parse(ItemStr);
+
+    if (ProductList !== null)
+    {
+        AllItemsImages = ProductList;
+        
+    }
+   
+    renderThreeRandomImages();
 }
 
   var ResultButton = document.getElementById('SubmitResult');
   ResultButton.addEventListener('click', GoalResult);
+  GetData();
 
 function GoalResult()
 {
     var ResultItemsList = document.getElementById('ResultItemsList');
     var goalResult;
+    
     for (var i = 0; i < AllItemsImages.length; i++) {
         
         goalResult = document.createElement('li');
