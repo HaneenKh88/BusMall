@@ -29,6 +29,8 @@ function ItemImages(name,source){
     AllItemsImages.push(this);
   }
 
+  
+  GetData();
  
   RoundsNumberForm.addEventListener('submit', AddRoundNum);
 
@@ -164,6 +166,24 @@ function StoreData()
 
 function GetData()
 {
+    if(localStorage.getItem('Rounds'))
+    {
+        var ItemStr = JSON.parse(localStorage.getItem('Rounds'));
+
+
+        for (var i = 0; i < ItemStr.length; i++) {
+            
+
+         new ItemImages (ItemStr[i].name , ItemStr[i].source, ItemStr[i].ImagesClicks, ItemStr[i].ImagesShown);
+
+        }
+        
+    }
+    
+}
+
+/*function GetData()
+{
     var ItemStr = localStorage.getItem('Rounds');
     ProductList = JSON.parse(ItemStr);
 
@@ -174,17 +194,19 @@ function GetData()
     }
    
     renderThreeRandomImages();
-}
+}*/
+
 
   var ResultButton = document.getElementById('SubmitResult');
   ResultButton.addEventListener('click', GoalResult);
-  GetData();
 
 function GoalResult()
 {
     var ResultItemsList = document.getElementById('ResultItemsList');
     var goalResult;
+   
     
+   
     for (var i = 0; i < AllItemsImages.length; i++) {
         
         goalResult = document.createElement('li');
@@ -192,6 +214,7 @@ function GoalResult()
         ResultItemsList.appendChild(goalResult);
     }
 
+   
 
     FirstImage.removeEventListener('click',handleUserClick);
     SecondImage.removeEventListener('click',handleUserClick);
