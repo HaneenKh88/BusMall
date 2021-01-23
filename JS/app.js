@@ -1,9 +1,16 @@
+/* eslint-disable new-cap */
+/* eslint-disable no-multi-spaces */
+/* eslint-disable semi */
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable no-redeclare */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 'Strict'
 
 var AllItemsImages = [];
 var clicksArr = []; // add number of clicks to the chart
-var shownArr = [];  // add number of shown to the chart
-var productsName = [];  // add name of images to the chart
+var shownArr = []; // add number of shown to the chart
+var productsName = []; // add name of images to the chart
 var FirstImage = document.getElementById('First');
 var SecondImage = document.getElementById('Second');
 var ThirdImage = document.getElementById('Third');
@@ -21,28 +28,28 @@ var ThirdImageIndexPrevious = -1;
 
 
 function ItemImages(name,source){
-    this.name = name;
-    this.source = source;
-    this.ImagesClicks = 0;
-    this.ImagesShown = 0;
-    productsName.push(name);
-    AllItemsImages.push(this);
-  }
+  this.name = name;
+  this.source = source;
+  this.ImagesClicks = 0;
+  this.ImagesShown = 0;
+  productsName.push(name);
+  AllItemsImages.push(this);
+}
 
   
   
  
  
-  RoundsNumberForm.addEventListener('submit', AddRoundNum);
+RoundsNumberForm.addEventListener('submit', AddRoundNum);
 
-  function AddRoundNum(event)
-  {
-      event.preventDefault();
+function AddRoundNum(event)
+{
+  event.preventDefault();
      
-     DefaultRoundsNumber = parseInt(event.target.RoundsNum.value) -1 ;
-     return  DefaultRoundsNumber;
+  DefaultRoundsNumber = parseInt(event.target.RoundsNum.value) -1 ;
+  return  DefaultRoundsNumber;
      
-  }
+}
 
   
 
@@ -77,43 +84,43 @@ SecondImage.addEventListener('click',handleUserClick);
 ThirdImage.addEventListener('click',handleUserClick);
 
 function generateRandomIndex(){
-    return Math.floor(Math.random() * (AllItemsImages.length));
+  return Math.floor(Math.random() * (AllItemsImages.length));
 
-  }
+}
 
 function renderThreeRandomImages()
 {
-    var NonAllowed = [FirstImageIndexPrevious, SecondImageIndexPrevious, ThirdImageIndexPrevious];
+  var NonAllowed = [FirstImageIndexPrevious, SecondImageIndexPrevious, ThirdImageIndexPrevious];
 
-    do{
+  do{
     FirstImageIndex = generateRandomIndex();
-    }
-    while(NonAllowed.includes(FirstImageIndex));
+  }
+  while(NonAllowed.includes(FirstImageIndex));
 
-    FirstImageIndexPrevious = FirstImageIndex;
-    NonAllowed.push(FirstImageIndex);
+  FirstImageIndexPrevious = FirstImageIndex;
+  NonAllowed.push(FirstImageIndex);
 
-    do{
+  do{
     SecondImageIndex = generateRandomIndex();
-    }
-    while(NonAllowed.includes(SecondImageIndex))
+  }
+  while(NonAllowed.includes(SecondImageIndex))
     
-    SecondImageIndexPrevious = SecondImageIndex;
-    NonAllowed.push(SecondImageIndex);
+  SecondImageIndexPrevious = SecondImageIndex;
+  NonAllowed.push(SecondImageIndex);
 
-    do{
+  do{
     ThirdImageIndex = generateRandomIndex();
-    } 
-    while(NonAllowed.includes(ThirdImageIndex))
-    ThirdImageIndexPrevious = ThirdImageIndex;
+  } 
+  while(NonAllowed.includes(ThirdImageIndex))
+  ThirdImageIndexPrevious = ThirdImageIndex;
 
     
-        AllItemsImages[FirstImageIndex].ImagesShown++;
-        FirstImage.src = AllItemsImages[FirstImageIndex].source;
-        AllItemsImages[SecondImageIndex].ImagesShown++;
-        SecondImage.src = AllItemsImages[SecondImageIndex].source;
-        AllItemsImages[ThirdImageIndex].ImagesShown++;
-        ThirdImage.src = AllItemsImages[ThirdImageIndex].source;
+  AllItemsImages[FirstImageIndex].ImagesShown++;
+  FirstImage.src = AllItemsImages[FirstImageIndex].source;
+  AllItemsImages[SecondImageIndex].ImagesShown++;
+  SecondImage.src = AllItemsImages[SecondImageIndex].source;
+  AllItemsImages[ThirdImageIndex].ImagesShown++;
+  ThirdImage.src = AllItemsImages[ThirdImageIndex].source;
 
 
    
@@ -129,53 +136,53 @@ function handleUserClick(event)
 {
     
 
-    if(TotalClicks <= DefaultRoundsNumber)
-    {
-        if(event.target.id === 'First'){
-            AllItemsImages[FirstImageIndex].ImagesClicks++;
-            TotalClicks++;
-          }
-        else if(event.target.id === 'Second'){
-            AllItemsImages[FirstImageIndex].ImagesClicks++;
-            TotalClicks++;
-        }
-        else if(event.target.id === 'Third'){
-                AllItemsImages[FirstImageIndex].ImagesClicks++;
-                TotalClicks++;
-        }
-
-        
-        renderThreeRandomImages();
-        
+  if(TotalClicks <= DefaultRoundsNumber)
+  {
+    if(event.target.id === 'First'){
+      AllItemsImages[FirstImageIndex].ImagesClicks++;
+      TotalClicks++;
+    }
+    else if(event.target.id === 'Second'){
+      AllItemsImages[FirstImageIndex].ImagesClicks++;
+      TotalClicks++;
+    }
+    else if(event.target.id === 'Third'){
+      AllItemsImages[FirstImageIndex].ImagesClicks++;
+      TotalClicks++;
     }
 
-    else
-    {
-        ItemsImagesDiv.removeEventListener('click' ,handleUserClick );
-        ResultButton.disabled = false;
         
-    }
+    renderThreeRandomImages();
+        
+  }
 
-    StoreData();
+  else
+  {
+    ItemsImagesDiv.removeEventListener('click' ,handleUserClick );
+    ResultButton.disabled = false;
+        
+  }
+
+  StoreData();
 }
 
 
 function StoreData()
 {
-    var Order = JSON.stringify(AllItemsImages);
-    localStorage.setItem('Rounds',Order);
+  var Order = JSON.stringify(AllItemsImages);
+  localStorage.setItem('Rounds',Order);
 }
 
 function GetData()
 {
-    var ItemStr = localStorage.getItem('Rounds');
-    ProductList = JSON.parse(ItemStr);
+  var ItemStr = localStorage.getItem('Rounds');
+  ProductList = JSON.parse(ItemStr);
 
-    if (ProductList !== null)
-    {
-        AllItemsImages = ProductList;
+  if (ProductList !== null)
+  {
+    AllItemsImages = ProductList;
         
-    }
+  }
    
     
     
@@ -196,81 +203,81 @@ function GetData()
 }*/
 
 
-  var ResultButton = document.getElementById('SubmitResult');
-  ResultButton.addEventListener('click', GoalResult);
+var ResultButton = document.getElementById('SubmitResult');
+ResultButton.addEventListener('click', GoalResult);
 
 function GoalResult()
 {
    
-    var ResultItemsList = document.getElementById('ResultItemsList');
-    var goalResult;
+  var ResultItemsList = document.getElementById('ResultItemsList');
+  var goalResult;
     
     
    
-    for (var i = 0; i < AllItemsImages.length; i++) {
+  for (var i = 0; i < AllItemsImages.length; i++) {
         
-        goalResult = document.createElement('li');
-        goalResult.textContent =  AllItemsImages[i].name + ' had '+  AllItemsImages[i].ImagesClicks + ' votes, and was seen ' + AllItemsImages[i].ImagesShown ;
-        ResultItemsList.appendChild(goalResult);
-    }
+    goalResult = document.createElement('li');
+    goalResult.textContent =  AllItemsImages[i].name + ' had '+  AllItemsImages[i].ImagesClicks + ' votes, and was seen ' + AllItemsImages[i].ImagesShown ;
+    ResultItemsList.appendChild(goalResult);
+  }
 
       
    
 
-    FirstImage.removeEventListener('click',handleUserClick);
-    SecondImage.removeEventListener('click',handleUserClick);
-    ThirdImage.removeEventListener('click',handleUserClick);
+  FirstImage.removeEventListener('click',handleUserClick);
+  SecondImage.removeEventListener('click',handleUserClick);
+  ThirdImage.removeEventListener('click',handleUserClick);
 
-    ResultButton.disabled = true;
+  ResultButton.disabled = true;
 
 
-    shownArr = [];
-    clicksArr = [];
+  shownArr = [];
+  clicksArr = [];
    
-    for (var i = 0; i < AllItemsImages.length; i++) {
-      shownArr.push(AllItemsImages[i].ImagesShown);
-      clicksArr.push(AllItemsImages[i].ImagesClicks);
-    }
+  for (var i = 0; i < AllItemsImages.length; i++) {
+    shownArr.push(AllItemsImages[i].ImagesShown);
+    clicksArr.push(AllItemsImages[i].ImagesClicks);
+  }
   
-      var ctx = document.getElementById('BusMallChart').getContext('2d');
-      var chart = new Chart(ctx, {
-      // The type of chart we want to create
-      type: 'bar',
+  var ctx = document.getElementById('BusMallChart').getContext('2d');
+  var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
       
-      // The data for our dataset
-      data: {
-          labels: productsName,
-          datasets: [
-              {
-              label: 'Clicked',
-              backgroundColor: 'EF5FCA',
-              borderColor: 'FFFFFF',
-              data: clicksArr
-          },
+    // The data for our dataset
+    data: {
+      labels: productsName,
+      datasets: [
+        {
+          label: 'Clicked',
+          backgroundColor: 'EF5FCA',
+          borderColor: 'FFFFFF',
+          data: clicksArr
+        },
   
-          {
-              label: 'Shown',
-              backgroundColor: 'rgb(142, 0, 91)',
-              borderColor: 'FFFFFF',
-              data: shownArr
-          },
+        {
+          label: 'Shown',
+          backgroundColor: 'rgb(142, 0, 91)',
+          borderColor: 'FFFFFF',
+          data: shownArr
+        },
       ],
-      },
+    },
   
-      // Configuration options go here
-      options: {
-        scales: {
-            yAxes: [{
-                ticks: {
+    // Configuration options go here
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
                     
-                    min: 0,
-                    beginAtZero: 0,
-                    stepSize: 1,
-                }
-            }],
+            min: 0,
+            beginAtZero: 0,
+            stepSize: 1,
+          }
+        }],
 
-        }
       }
+    }
   });
  
   
