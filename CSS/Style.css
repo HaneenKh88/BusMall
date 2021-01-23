@@ -1,6 +1,6 @@
 body
 {
-    background-image: url(https://wallpaperset.com/w/full/0/8/7/52223.jpg);
+    background-image: url(https://cdn.pixabay.com/photo/2017/08/07/17/26/cars-2605953_960_720.jpg);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -29,7 +29,8 @@ form
     background-color: rgba(255, 255, 255, 0.651);
     width: 50%;
     height: 50%;
-    margin-left: 25%;
+    margin-left: 26%;
+   
 }
 
 label,input
@@ -50,12 +51,17 @@ label
    
 }
 
+
+
 #ItemsImagesDiv
 {
     display: inline-block;
     border: 5px solid rgba(255, 255, 255, 0.63);
     margin-top: 5%;
     margin-left: 27%;
+   
+    
+    
 }
 
 #SubmitResult
