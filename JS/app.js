@@ -42,9 +42,10 @@ function ItemImages(name,source){
  
 RoundsNumberForm.addEventListener('submit', AddRoundNum);
 
-function AddRoundNum(event)
-{
-  event.preventDefault();
+//this function to let the user enter the number of rounds
+  function AddRoundNum(event)
+  {
+      event.preventDefault();
      
   DefaultRoundsNumber = parseInt(event.target.RoundsNum.value) -1 ;
   return  DefaultRoundsNumber;
@@ -83,11 +84,14 @@ FirstImage.addEventListener('click',handleUserClick);
 SecondImage.addEventListener('click',handleUserClick);
 ThirdImage.addEventListener('click',handleUserClick);
 
+// to add a random image index
+
 function generateRandomIndex(){
   return Math.floor(Math.random() * (AllItemsImages.length));
 
 }
 
+// to genrate 3 unique images
 function renderThreeRandomImages()
 {
   var NonAllowed = [FirstImageIndexPrevious, SecondImageIndexPrevious, ThirdImageIndexPrevious];
@@ -131,6 +135,7 @@ function renderThreeRandomImages()
 }
 
 
+// add the number of cliks to the total
 
 function handleUserClick(event)
 {
@@ -166,6 +171,7 @@ function handleUserClick(event)
   StoreData();
 }
 
+// kto store the data in local storge
 
 function StoreData()
 {
@@ -173,6 +179,7 @@ function StoreData()
   localStorage.setItem('Rounds',Order);
 }
 
+// get the update stored data in local storge
 function GetData()
 {
   var ItemStr = localStorage.getItem('Rounds');
@@ -206,6 +213,8 @@ function GetData()
 var ResultButton = document.getElementById('SubmitResult');
 ResultButton.addEventListener('click', GoalResult);
 
+
+// give the final result to the user
 function GoalResult()
 {
    
