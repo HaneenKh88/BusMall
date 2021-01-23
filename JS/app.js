@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+
 /* eslint-disable new-cap */
 /* eslint-disable no-multi-spaces */
 /* eslint-disable semi */
@@ -294,6 +296,7 @@ function GoalResult()
 
 
  
+
 
 
 
