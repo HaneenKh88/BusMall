@@ -30,7 +30,8 @@ function ItemImages(name,source){
   }
 
   
-  GetData();
+  
+ 
  
   RoundsNumberForm.addEventListener('submit', AddRoundNum);
 
@@ -69,7 +70,7 @@ console.log(AllItemsImages);
 
 
 renderThreeRandomImages();
-
+GetData();
 
 FirstImage.addEventListener('click',handleUserClick);
 SecondImage.addEventListener('click',handleUserClick);
@@ -143,8 +144,9 @@ function handleUserClick(event)
                 TotalClicks++;
         }
 
+        
         renderThreeRandomImages();
-
+        
     }
 
     else
@@ -166,19 +168,16 @@ function StoreData()
 
 function GetData()
 {
-    if(localStorage.getItem('Rounds'))
+    var ItemStr = localStorage.getItem('Rounds');
+    ProductList = JSON.parse(ItemStr);
+
+    if (ProductList !== null)
     {
-        var ItemStr = JSON.parse(localStorage.getItem('Rounds'));
-
-
-        for (var i = 0; i < ItemStr.length; i++) {
-            
-
-         new ItemImages (ItemStr[i].name , ItemStr[i].source, ItemStr[i].ImagesClicks, ItemStr[i].ImagesShown);
-
-        }
+        AllItemsImages = ProductList;
         
     }
+   
+    
     
 }
 
@@ -202,9 +201,10 @@ function GetData()
 
 function GoalResult()
 {
+   
     var ResultItemsList = document.getElementById('ResultItemsList');
     var goalResult;
-   
+    
     
    
     for (var i = 0; i < AllItemsImages.length; i++) {
@@ -214,6 +214,7 @@ function GoalResult()
         ResultItemsList.appendChild(goalResult);
     }
 
+      
    
 
     FirstImage.removeEventListener('click',handleUserClick);
@@ -261,7 +262,7 @@ function GoalResult()
         scales: {
             yAxes: [{
                 ticks: {
-                    max: 25,
+                    
                     min: 0,
                     beginAtZero: 0,
                     stepSize: 1,
@@ -271,7 +272,7 @@ function GoalResult()
         }
       }
   });
-  
+ 
   
 }
 
