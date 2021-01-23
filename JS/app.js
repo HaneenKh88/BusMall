@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable new-cap */
 /* eslint-disable no-multi-spaces */
 /* eslint-disable semi */
@@ -38,7 +39,7 @@ function ItemImages(name,source){
 
   
   
- 
+ // let the user to enter a number for the rounds
  
 RoundsNumberForm.addEventListener('submit', AddRoundNum);
 
@@ -87,6 +88,8 @@ function generateRandomIndex(){
   return Math.floor(Math.random() * (AllItemsImages.length));
 
 }
+
+//  function that genrate a 3 random unique images
 
 function renderThreeRandomImages()
 {
@@ -166,12 +169,15 @@ function handleUserClick(event)
   StoreData();
 }
 
+// function that store the data to the local storge 
 
 function StoreData()
 {
   var Order = JSON.stringify(AllItemsImages);
   localStorage.setItem('Rounds',Order);
 }
+
+// function that update the user inputs into local storge
 
 function GetData()
 {
@@ -205,6 +211,8 @@ function GetData()
 
 var ResultButton = document.getElementById('SubmitResult');
 ResultButton.addEventListener('click', GoalResult);
+
+// funcrtion that give the user the final result 
 
 function GoalResult()
 {
